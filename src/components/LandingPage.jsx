@@ -113,7 +113,7 @@ export default function LandingPage({ onEnter }) {
               </div>
               <div className="demo-divider"></div>
               <div className="demo-line demo-text">
-                Contact us at <span className="demo-match">hello<span className="demo-group1">@</span>example<span className="demo-group2">.</span>com</span> today
+                Contact us at <span className="demo-match">2025.krishiva<span className="demo-group1">@</span>isu.ac.in</span> today
               </div>
               <div className="demo-line demo-result">
                 <span className="demo-result-badge">✓ 1 match</span>
@@ -148,10 +148,6 @@ export default function LandingPage({ onEnter }) {
         </button>
       </section>
 
-      {/* Footer */}
-      <footer className="landing-footer">
-        <p>Regex Sandbox • Built with React & Vite • ITM Skills University</p>
-      </footer>
     </div>
   );
 }
