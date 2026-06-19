@@ -38,14 +38,12 @@ export default function LandingPage({ onEnter }) {
 
   return (
     <div className="landing" id="landing-page">
-      {/* Decorative background blobs */}
       <div className="landing-bg">
         <div className="blob blob-1"></div>
         <div className="blob blob-2"></div>
         <div className="blob blob-3"></div>
       </div>
 
-      {/* Nav */}
       <nav className="landing-nav">
         <div className="landing-nav-logo">
           <div className="nav-logo-icon">.*</div>
@@ -56,7 +54,6 @@ export default function LandingPage({ onEnter }) {
         </button>
       </nav>
 
-      {/* Hero */}
       <section className="landing-hero" id="landing-hero">
         <div className="hero-badge">
           <span className="badge-dot"></span>
@@ -82,7 +79,6 @@ export default function LandingPage({ onEnter }) {
           </button>
         </div>
 
-        {/* Animated regex demo */}
         <div className="hero-demo">
           <div className="demo-window">
             <div className="demo-titlebar">
@@ -124,7 +120,6 @@ export default function LandingPage({ onEnter }) {
         </div>
       </section>
 
-      {/* Features */}
       <section className="landing-features" id="landing-features">
         <h2 className="features-title">Everything You Need</h2>
         <p className="features-subtitle">A complete regex development environment in your browser</p>
@@ -139,7 +134,6 @@ export default function LandingPage({ onEnter }) {
         </div>
       </section>
 
-      {/* Bottom CTA */}
       <section className="landing-bottom-cta">
         <h2>Ready to build your regex?</h2>
         <p>No sign-up, no install — just open and start writing.</p>

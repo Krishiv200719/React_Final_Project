@@ -24,16 +24,16 @@ function App() {
   const [testText, setTestText] = useState(DEFAULT_TEST_TEXT);
   const [activeTab, setActiveTab] = useState('matches');
 
-  // Ref for inject callback from CheatSheet -> RegexInputBar
+  
   const injectRef = useRef(null);
 
-  // Tokenize for explanation
+  
   const tokens = useMemo(() => tokenizeRegex(pattern), [pattern]);
 
-  // Generate explanation
+  
   const explanations = useMemo(() => explainRegex(tokens), [tokens]);
 
-  // Evaluate regex against test text
+  
   const evalResult = useMemo(
     () => evaluateRegex(pattern, flags, testText),
     [pattern, flags, testText]
@@ -58,14 +58,13 @@ function App() {
     { key: 'saved', label: 'Saved' },
   ];
 
-  // Show landing page
+  
   if (showLanding) {
     return <LandingPage onEnter={() => setShowLanding(false)} />;
   }
 
   return (
     <div className="app" id="app">
-      {/* Header */}
       <header className="app-header" id="app-header">
         <div className="app-logo">
           <button className="back-btn" onClick={() => setShowLanding(true)} title="Back to home">
@@ -79,9 +78,7 @@ function App() {
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="app-main" id="app-main">
-        {/* Regex Input Bar — full width */}
         <div className="input-section">
           <RegexInputBar
             pattern={pattern}
@@ -98,7 +95,6 @@ function App() {
           )}
         </div>
 
-        {/* Left: Test workspace */}
         <div className="workspace-area">
           <TestInputCard
             testText={testText}
@@ -108,7 +104,6 @@ function App() {
           />
         </div>
 
-        {/* Right: Sidebar with tabs */}
         <div className="sidebar-area">
           <div className="sidebar-tabs">
             {sidebarTabs.map((tab) => (

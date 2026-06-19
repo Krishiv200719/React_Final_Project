@@ -1,6 +1,6 @@
 import { useMemo, useRef, useEffect } from 'react';
 
-// Match highlight colors — one per capture group, cycling
+
 const MATCH_COLORS = [
   'var(--match-color-0)',
   'var(--match-color-1)',
@@ -10,23 +10,19 @@ const MATCH_COLORS = [
   'var(--match-color-5)',
 ];
 
-/**
- * Build an array of text segments with highlight info.
- * Each segment: { text, isMatch, matchIndex, groupNumber }
- */
 function buildHighlightedSegments(text, matches) {
   if (!matches || matches.length === 0) {
     return [{ text, isMatch: false }];
   }
 
-  // Flatten all highlight ranges: full matches + capture groups
+  
   const ranges = [];
   matches.forEach((m, mIdx) => {
     ranges.push({
       start: m.index,
       end: m.index + m.length,
       matchIndex: mIdx,
-      groupNumber: 0, // 0 = full match
+      groupNumber: 0, 
       priority: 0,
     });
     m.groups.forEach((g) => {
@@ -42,10 +38,10 @@ function buildHighlightedSegments(text, matches) {
     });
   });
 
-  // Sort by start, then by priority descending (group highlights go on top)
+  
   ranges.sort((a, b) => a.start - b.start || b.priority - a.priority);
 
-  // Build segments using only full-match ranges for simplicity and correctness
+  
   const fullMatchRanges = ranges.filter(r => r.groupNumber === 0);
   const segments = [];
   let cursor = 0;
@@ -55,7 +51,7 @@ function buildHighlightedSegments(text, matches) {
       segments.push({ text: text.slice(cursor, range.start), isMatch: false });
     }
 
-    // Find capture groups within this match
+    
     const matchGroups = ranges.filter(
       r => r.matchIndex === range.matchIndex && r.groupNumber > 0
     );
@@ -68,7 +64,7 @@ function buildHighlightedSegments(text, matches) {
         groupNumber: 0,
       });
     } else {
-      // Sub-segment the match to show capture groups
+      
       let innerCursor = range.start;
       const sortedGroups = [...matchGroups].sort((a, b) => a.start - b.start);
 
@@ -119,7 +115,7 @@ export default function TestInputCard({ testText, onTestTextChange, matches, exe
     [testText, matches]
   );
 
-  // Sync scroll
+  
   useEffect(() => {
     const textarea = textareaRef.current;
     const highlight = highlightRef.current;
@@ -156,7 +152,6 @@ export default function TestInputCard({ testText, onTestTextChange, matches, exe
       </div>
 
       <div className="test-input-container">
-        {/* Highlight layer behind text */}
         <div className="highlight-layer" ref={highlightRef} aria-hidden="true">
           {segments.map((seg, i) =>
             seg.isMatch ? (
@@ -175,7 +170,6 @@ export default function TestInputCard({ testText, onTestTextChange, matches, exe
           )}
         </div>
 
-        {/* Textarea */}
         <textarea
           ref={textareaRef}
           id="test-text-input"

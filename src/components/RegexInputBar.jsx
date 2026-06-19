@@ -30,14 +30,14 @@ export default function RegexInputBar({ pattern, onPatternChange, flags, onFlags
   const tokens = tokenizeRegex(pattern);
   const { error } = validateRegex(pattern, flags);
 
-  // Sync scroll between input and highlight overlay
+  
   const handleScroll = useCallback(() => {
     if (highlightRef.current && inputRef.current) {
       highlightRef.current.scrollLeft = inputRef.current.scrollLeft;
     }
   }, []);
 
-  // Handle inject from cheat sheet
+  
   useEffect(() => {
     if (onInjectToken) {
       onInjectToken.current = (tokenStr) => {
@@ -46,7 +46,7 @@ export default function RegexInputBar({ pattern, onPatternChange, flags, onFlags
           const end = inputRef.current.selectionEnd;
           const newPattern = pattern.slice(0, start) + tokenStr + pattern.slice(end);
           onPatternChange(newPattern);
-          // Move cursor after injected text
+          
           setTimeout(() => {
             inputRef.current.selectionStart = start + tokenStr.length;
             inputRef.current.selectionEnd = start + tokenStr.length;
@@ -70,17 +70,15 @@ export default function RegexInputBar({ pattern, onPatternChange, flags, onFlags
       <div className="regex-input-wrapper">
         <span className="regex-delimiter">/</span>
         <div className={`regex-input-container ${error ? 'has-error' : ''} ${isFocused ? 'focused' : ''}`}>
-          {/* Syntax-highlighted overlay */}
+          
           <div className="regex-highlight-overlay" ref={highlightRef} aria-hidden="true">
             {tokens.map((tok, i) => (
               <span key={i} className={TOKEN_CLASSNAMES[tok.type] || 'tok-literal'}>
                 {tok.value}
               </span>
             ))}
-            {/* Invisible trailing character to maintain height */}
             <span>&nbsp;</span>
           </div>
-          {/* Actual input */}
           <input
             ref={inputRef}
             id="regex-pattern-input"
@@ -102,7 +100,6 @@ export default function RegexInputBar({ pattern, onPatternChange, flags, onFlags
         <span className="regex-flags-display">{flags || <span className="flags-placeholder">flags</span>}</span>
       </div>
 
-      {/* Flag toggles */}
       <div className="regex-flags" id="regex-flags">
         {FLAGS.map(({ key, label, desc }) => (
           <button
@@ -118,7 +115,6 @@ export default function RegexInputBar({ pattern, onPatternChange, flags, onFlags
         ))}
       </div>
 
-      {/* Error display */}
       {error && (
         <div className="regex-error" id="regex-error">
           <span className="error-icon">⚠</span>

@@ -1,8 +1,3 @@
-/**
- * Storage Manager
- * Manages saved regex snippets in localStorage.
- * Each snippet: { id, name, pattern, flags, testText, createdAt, updatedAt }
- */
 
 const STORAGE_KEY = 'regex_sandbox_snippets';
 
@@ -23,16 +18,10 @@ function saveAll(snippets) {
   }
 }
 
-/**
- * Get all saved snippets.
- */
 export function getSnippets() {
   return getAll();
 }
 
-/**
- * Save a new snippet.
- */
 export function saveSnippet({ name, pattern, flags, testText }) {
   const snippets = getAll();
   const snippet = {
@@ -49,9 +38,6 @@ export function saveSnippet({ name, pattern, flags, testText }) {
   return snippet;
 }
 
-/**
- * Update an existing snippet by ID.
- */
 export function updateSnippet(id, updates) {
   const snippets = getAll();
   const index = snippets.findIndex(s => s.id === id);
@@ -65,18 +51,12 @@ export function updateSnippet(id, updates) {
   return snippets[index];
 }
 
-/**
- * Delete a snippet by ID.
- */
 export function deleteSnippet(id) {
   const snippets = getAll().filter(s => s.id !== id);
   saveAll(snippets);
   return snippets;
 }
 
-/**
- * Rename a snippet.
- */
 export function renameSnippet(id, newName) {
   return updateSnippet(id, { name: newName });
 }

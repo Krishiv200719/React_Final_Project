@@ -1,7 +1,3 @@
-/**
- * Regex Explainer
- * Translates tokenized regex into plain-English step-by-step explanations.
- */
 
 import { TOKEN_TYPES } from './regexTokenizer';
 
@@ -34,7 +30,7 @@ function explainQuantifier(value) {
   } else if (base === '?') {
     desc = 'zero or one time (optional)';
   } else {
-    // Range quantifier {n}, {n,}, {n,m}
+    
     const rangeMatch = base.match(/^\{(\d+)(,(\d+)?)?\}$/);
     if (rangeMatch) {
       const min = rangeMatch[1];
@@ -62,7 +58,7 @@ function explainCharClass(value) {
     return `Match ${SHORTHAND_MAP[value]}`;
   }
 
-  // Character set [...]
+  
   if (value.startsWith('[')) {
     const inner = value.slice(1, -1);
     if (inner.startsWith('^')) {
@@ -84,10 +80,6 @@ function explainGroupOpen(value) {
   return `Start group: ${value}`;
 }
 
-/**
- * Generate plain-English explanation from an array of tokens.
- * Returns an array of { text: string, tokenIndex: number } objects.
- */
 export function explainRegex(tokens) {
   const steps = [];
   let prevWasQuantifiable = false;
@@ -136,7 +128,7 @@ export function explainRegex(tokens) {
       case TOKEN_TYPES.QUANTIFIER: {
         const quantDesc = explainQuantifier(token.value);
         if (prevWasQuantifiable && steps.length > 0) {
-          // Merge with previous step
+          
           steps[steps.length - 1].text += `, ${quantDesc}`;
         } else {
           desc = `Repeat previous ${quantDesc}`;
